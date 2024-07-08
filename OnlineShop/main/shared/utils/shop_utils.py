@@ -1,5 +1,8 @@
+import re
+
 from PIL import Image
 from django.core.exceptions import ValidationError
+from rest_framework import serializers
 
 
 class ShopUtils:
@@ -27,3 +30,16 @@ class ShopUtils:
         if image.size > 2 * 1024 * 1024:
             raise ValidationError("The maximum file size that can be uploaded is 2MB")
         return image
+
+    @staticmethod
+    def validate_username(username):
+        if username.isnumeric():
+            raise serializers.ValidationError("username must have characters too!")
+
+    @staticmethod
+    def validate_password(password):
+        if len(password) < 5:
+            raise serializers.ValidationError("Make sure the length of your password is more than 5 characters")
+        elif re.search('[A-Z]', password) is None:
+            raise serializers.ValidationError("Make sure your password has a capital letter in it")
+
