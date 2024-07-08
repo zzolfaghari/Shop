@@ -37,6 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'main.apps.MainConfig',
+    'rest_framework',
+    'drf_spectacular',
 ]
 
 MIDDLEWARE = [
@@ -69,8 +72,25 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'OnlineShop.wsgi.application'
 
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'Shop System Management',
+    'DESCRIPTION': 'Shop API Documents',
+    'VERSION': '1.0.0',
+    'SERVE_INCLUDE_SCHEMA': False,
+    'COMPONENT_SPLIT_REQUEST': True
+
+}
 AUTH_USER_MODEL = 'main.User'
 
+REST_FRAMEWORK = {
+
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+    'DEFAULT_PARSER_CLASSES': [
+        'rest_framework.parsers.JSONParser',
+        'rest_framework.parsers.FormParser',
+        'rest_framework.parsers.MultiPartParser',
+        'rest_framework.parsers.FileUploadParser',
+    ],}
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
