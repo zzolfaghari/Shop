@@ -1,6 +1,8 @@
 from django.db.transaction import atomic
 
 from main.dao.product.product_dao import ProductDao
+from main.model.user.user_entity import User
+from main.model.vo.product_vo import ProductVO
 
 
 class ProductLogic:
@@ -15,3 +17,6 @@ class ProductLogic:
             list_of_images = kwargs.pop(ProductVO.image)
             for image in list_of_images:
                 self.dao.create_product_images(product_id=product.id, image=image)
+
+    def get_all_products(self, seller: User) -> None:
+        return self.dao.get_all_products(seller)
