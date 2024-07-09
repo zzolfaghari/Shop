@@ -7,10 +7,10 @@ from main.api.serializer.system.system_serializer import ResponseSerializer
 class CreateResponse(Response):
     def __init__(self):
         self.default_message = 'Created Successfully'
-        self.default_status_code = status.HTTP_201_CREATED
+        self.status_code = status.HTTP_201_CREATED
         response = ResponseSerializer({'message': str(self.default_message), 'status_code': self.status_code})
         super().__init__(data=response.data,
-                         status=self.default_status_code)
+                         status=self.status_code)
 
 
 class ErrorResponse(Response):
@@ -20,6 +20,6 @@ class ErrorResponse(Response):
                 {'message': '', 'status_code': ''})
         else:
             self.error = ResponseSerializer(
-                {'default_message': str(message), 'default_status_code': status})
+                {'message': str(message), 'status_code': status})
 
         super().__init__(data=self.error.data, status=status)
