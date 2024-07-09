@@ -20,3 +20,11 @@ class ProductLogic:
 
     def get_all_products(self, seller: User) -> None:
         return self.dao.get_all_products(seller)
+
+    @atomic
+    def update_product(self, product_id: int, **kwargs: dict):
+        return self.dao.update_product(product_id, **kwargs)
+
+    @atomic
+    def delete_product(self, product_id: int, seller: User) -> None:
+        return self.dao.delete_product(product_id, seller=seller)

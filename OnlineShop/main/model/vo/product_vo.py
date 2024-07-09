@@ -26,4 +26,7 @@ class ProductVO:
                 },
                 'required': ['title', 'description', 'price'],
             }
+    title = 'title'
+    description = 'description'
+    price = 'price'
 
